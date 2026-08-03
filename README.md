@@ -1,11 +1,15 @@
-# ResumeIQ AI
+# ResumeIQ 
 
-AI Powered Resume Analyzer
+An AI-powered Resume Analyzer that compares resumes against job descriptions, evaluates ATS compatibility, identifies missing skills, and provides actionable suggestions to improve interview chances.
 
-Tech Stack
+## Tech Stack
 
-- React
-- Node
-- Express
-- MongoDBs
+- React (Vite)
+- Node.js
+- Express.js
+- MongoDB
+- Gemini API
 
+## Status
+
+🚧 Currently in Development
