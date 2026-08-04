@@ -7,14 +7,22 @@ dotenv.config()
 
 const app = express();
 
-
-
+// Routers import
+const authRouter = require("./routes/auth.routes")
+const resumeRouter = require("./routes/resume.routes");
 
 
 // Middlewares
 app.use(express.json());
 app.use(express.urlencoded({extended : true}))
 app.use(cors());
+
+
+// Routes Middleware
+
+app.use("/api/auth" ,authRouter);
+app.use("/api/resume", resumeRouter);
+
 
 
 // Routes
