@@ -7,9 +7,24 @@ dotenv.config()
 
 const app = express();
 
+// config import
+
+const connectDB = require("./config/db")
+
+
+
+
+
 // Routers import
 const authRouter = require("./routes/auth.routes")
 const resumeRouter = require("./routes/resume.routes");
+
+
+
+
+// Database Connection
+
+// connectDB()
 
 
 // Middlewares
@@ -41,6 +56,17 @@ app.get('/',(req, res, next)=>{
 
 // Server listening 
 const PORT = process.env.PORT || 5000 ;
-app.listen(PORT , ()=>{
-    console.log(`Server is running on port ${PORT}`);
-})
+const startServer = async () => {
+    try {
+        await connectDB();
+
+        app.listen(PORT, () => {
+            console.log(`Server is running on port ${PORT}`);
+        });
+
+    } catch (error) {
+        console.error("Failed to start server:", error);
+    }
+};
+
+startServer();
