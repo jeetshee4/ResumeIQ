@@ -1,4 +1,5 @@
 const express = require("express")
+const authMiddleware = require("../middlewares/auth.middleware")
 
 const authRouter = express.Router();
 
@@ -23,7 +24,12 @@ authRouter.post("/login",loginUser)
 authRouter.post("/logout",logoutUser)
 
 
-
+authRouter.get("/profile" , authMiddleware , (req, res)=>{
+    res.status(200).json({
+        message: "You are authenticated",
+        userId: req.session.userId,
+    })
+})
 
 
 

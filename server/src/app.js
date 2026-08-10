@@ -1,6 +1,8 @@
 const express = require("express")
 const dotenv = require("dotenv")
 const cors = require("cors")
+const session = require("express-session")
+
 
 
 dotenv.config()
@@ -31,7 +33,23 @@ const resumeRouter = require("./routes/resume.routes");
 app.use(express.json());
 app.use(express.urlencoded({extended : true}))
 app.use(cors());
+app.use(
+  
+    session({
+      
+        secret: process.env.SESSION_SECRET,
+        resave: false,
+        saveUninitialized: false,
+        cookie: {
+          httpOnly: true,
+          secure: false,
+          maxAge: 1000*60*60*24,
 
+
+        },
+      })
+
+)
 
 // Routes Middleware
 
