@@ -1,6 +1,9 @@
 const express = require("express")
 
 const resumeRouter = express.Router();
+const upload = require("../middlewares/upload.middleware");
+const authMiddleware = require("../middlewares/auth.middleware")
+const validatePdf = require("../middlewares/pdfValidation.middleware");
 
 const {
     uploadResume,
@@ -12,7 +15,7 @@ const {
 
 // Upload Resume
 
-resumeRouter.post("/upload", uploadResume)
+resumeRouter.post("/upload",authMiddleware, upload.single("resume"), validatePdf ,uploadResume)
 
 resumeRouter.post("/analyze", analyzeResume);
 

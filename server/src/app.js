@@ -2,11 +2,11 @@ const express = require("express")
 const dotenv = require("dotenv")
 const cors = require("cors")
 const session = require("express-session")
-
-
+const errorMiddleware = require("./middlewares/error.middleware");
 
 dotenv.config()
 
+const cloudinary = require("./config/cloudinary");
 const app = express();
 
 // config import
@@ -51,17 +51,19 @@ app.use(
 
 )
 
-// Routes Middleware
-
-app.use("/api/auth" ,authRouter);
-app.use("/api/resume", resumeRouter);
-
-
-
 // Routes
 app.get('/',(req, res, next)=>{
     res.send("ResumeIQ is running ");
 })
+
+// Routes Middleware
+
+app.use("/api/auth" ,authRouter);
+app.use("/api/resume", resumeRouter);
+app.use(errorMiddleware);
+
+
+
 
 
 
