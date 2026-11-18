@@ -1,6 +1,8 @@
 
 const cloudinary = require("../config/cloudinary");
 const fs = require("fs");
+const extractPdfText = require("../utils/pdfParser")
+
 
 
 const uploadResume = async (req, res) => {
@@ -15,6 +17,7 @@ const uploadResume = async (req, res) => {
             });
         }
 
+        const extractedText = await extractPdfText(req.file.path);
 
         // Upload PDF to Cloudinary
 
@@ -32,9 +35,10 @@ const uploadResume = async (req, res) => {
                 originalName: req.file.originalname,
                 publicId: result.public_id,
                 format: result.format,
-                size: req.file.size
+                size: req.file.size,
+                extractedText: extractedText
             }
-        })
+        });
     }
     catch(error){
         console.error("Upload error:", error);
