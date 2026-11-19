@@ -17,9 +17,9 @@ const {
 
 resumeRouter.post("/upload",authMiddleware, upload.single("resume"), validatePdf ,uploadResume)
 
-resumeRouter.post("/analyze", analyzeResume);
+resumeRouter.post("/analyze",authMiddleware, analyzeResume);
 
-resumeRouter.get("/history", getHistory);
+resumeRouter.get("/history",authMiddleware, getHistory);
 
 
 module.exports = resumeRouter;
