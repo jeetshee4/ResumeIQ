@@ -55,7 +55,8 @@ const uploadResume = async (req, res) => {
                 originalName: savedResume.originalName,
                 publicId: savedResume.cloudinaryPublicId,
                 format: savedResume.format,
-                size: savedResume.size
+                size: savedResume.size,
+                extractedTextLength: savedResume.extractedText.length
             }
         });
     }
