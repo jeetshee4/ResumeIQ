@@ -32,7 +32,13 @@ const resumeRouter = require("./routes/resume.routes");
 // Middlewares
 app.use(express.json());
 app.use(express.urlencoded({extended : true}))
-app.use(cors());
+// For Frontend connection Front end must be allowed to send and receive credentials 
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+);
 app.use(
   
     session({
