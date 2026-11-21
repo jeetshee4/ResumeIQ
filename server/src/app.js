@@ -31,40 +31,43 @@ const resumeRouter = require("./routes/resume.routes");
 
 // Middlewares
 app.use(express.json());
-app.use(express.urlencoded({extended : true}))
+app.use(express.urlencoded({ extended: true }))
 // For Frontend connection Front end must be allowed to send and receive credentials 
 app.use(
-  cors({
-    origin: "https://resume-iq-olive-rho.vercel.app",
-    credentials: true,
-  })
+    cors({
+        origin: "https://resume-iq-olive-rho.vercel.app",
+        credentials: true,
+    })
 );
+app.set("trust proxy", 1);
+
+
+
 app.use(
-  
+
     session({
-      
+
         secret: process.env.SESSION_SECRET,
         resave: false,
         saveUninitialized: false,
         cookie: {
-          httpOnly: true,
-          secure: false,
-          maxAge: 1000*60*60*24,
-
-
+            httpOnly: true,
+            secure: true,
+            sameSite: "none",
+            maxAge: 1000 * 60 * 60 * 24,
         },
-      })
+    })
 
 )
 
 // Routes
-app.get('/',(req, res, next)=>{
+app.get('/', (req, res, next) => {
     res.send("ResumeIQ is running ");
 })
 
 // Routes Middleware
 
-app.use("/api/auth" ,authRouter);
+app.use("/api/auth", authRouter);
 app.use("/api/resume", resumeRouter);
 app.use(errorMiddleware);
 
@@ -81,7 +84,7 @@ app.use(errorMiddleware);
 
 
 // Server listening 
-const PORT = process.env.PORT || 5000 ;
+const PORT = process.env.PORT || 5000;
 const startServer = async () => {
     try {
         await connectDB();
