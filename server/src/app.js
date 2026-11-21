@@ -35,7 +35,7 @@ app.use(express.urlencoded({extended : true}))
 // For Frontend connection Front end must be allowed to send and receive credentials 
 app.use(
   cors({
-    origin: "https://resume-iq-live-rho.vercel.app",
+    origin: "https://resume-iq-olive-rho.vercel.app",
     credentials: true,
   })
 );
